@@ -215,7 +215,7 @@ module.exports = function(grunt) {
       },
       permalink: {
         options: {
-          permalink: ':year/:month/:day/index.html',
+          permalink: ':year/:month/:day/:title/index.html',
           //permalink: ':dirname/:title:ext',
           site: {
             title: 'Another Blog with Meta',

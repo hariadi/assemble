@@ -807,7 +807,7 @@ module.exports = function(grunt) {
         ':year': date.getFullYear(),
         ':month': ('0' + (date.getMonth() + 1)).slice(-2),
         ':day': ('0' + date.getDate()).slice(-2),
-        ':title': file,
+        ':title': slugify(file),
         ':file': file,
         ':ext': assemble.options.ext,
         ':basename': file,
@@ -822,5 +822,17 @@ module.exports = function(grunt) {
     return string.replace(re, function(match) {
       return map[match];
     });
+  };
+
+  /*
+  * CREDIT: Some of the following code is from helper-slugify
+  * https://github.com/helpers/helper-slugify/
+  */
+  var slugify = function (input) {
+  if (!input || typeof input !== 'string') return input;
+  return input.replace(/^\s+|\s+$/g, '')
+    .toLowerCase().replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
   };
 };
