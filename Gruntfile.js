@@ -212,6 +212,19 @@ module.exports = function(grunt) {
         files: {
           'test/actual/nested-layouts/': ['test/fixtures/pages/*.hbs']
         }
+      },
+      permalink: {
+        options: {
+          permalink: ':year/:month/:day/index.html',
+          //permalink: ':dirname/:title:ext',
+          site: {
+            title: 'Another Blog with Meta',
+            author: 'Brian Woodward'
+          }
+        },
+        files: {
+          'test/actual/permalink/': ['test/fixtures/pages/blog/permalink.hbs']
+        }
       }
     },
 
