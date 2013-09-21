@@ -346,6 +346,10 @@ module.exports = function(grunt) {
               return;
             }
 
+            if (assemble.options.permalink) {
+              pageObj.dest = targetPath(destFile, assemble, pageContext);
+            }
+
             assemble.options.collections.pages.items[0].pages.push(pageObj);
 
             lodash.each(assemble.options.collections, function(item, key) {
@@ -781,4 +785,42 @@ module.exports = function(grunt) {
     return filecontent;
   };
 
+  /*
+  * CREDIT: Some of the following code is from wintersmith
+  * https://github.com/jnordberg/wintersmith/
+  */
+  var targetPath = function(dest, assemble, context) {
+    var date, targetDest, permalink, filename, file;
+
+    date = context.date || context.timestamp;
+    if (!date) {
+      return dest;
+    }
+
+    targetDest = path.dirname(dest);
+    permalink = targetDest + '/' + assemble.options.permalink;
+
+    filename = path.basename(dest);
+    file = filename.substr(0, filename.lastIndexOf('.'))
+
+    return replaceAll(permalink, {
+        ':year': date.getFullYear(),
+        ':month': ('0' + (date.getMonth() + 1)).slice(-2),
+        ':day': ('0' + date.getDate()).slice(-2),
+        ':title': file,
+        ':file': file,
+        ':ext': assemble.options.ext,
+        ':basename': file,
+        //':categories': '',
+        //':tags': ''
+      });
+  };
+
+  var replaceAll = function(string, map) {
+    var re;
+    re = new RegExp(Object.keys(map).join('|'), 'gi');
+    return string.replace(re, function(match) {
+      return map[match];
+    });
+  };
 };
