@@ -792,22 +792,29 @@ module.exports = function(grunt) {
   var targetPath = function(dest, assemble, context) {
     var date, targetDest, permalink, filename, file;
 
+    // Get date from this two context
     date = context.date || context.timestamp;
+
+    // Ensure we handle that source object with date object
+    date = new Date(Date.parse(date));
+
+    // If no date/timestamp found, use Assemble default method render
     if (!date) {
       return dest;
     }
 
+    // Add this permalink to Assemble target dest dirname
     targetDest = path.dirname(dest);
     permalink = targetDest + '/' + assemble.options.permalink;
 
     filename = path.basename(dest);
-    file = filename.substr(0, filename.lastIndexOf('.'))
+    file = filename.substr(0, filename.lastIndexOf('.'));
 
     return replaceAll(permalink, {
         ':year': date.getFullYear(),
         ':month': ('0' + (date.getMonth() + 1)).slice(-2),
         ':day': ('0' + date.getDate()).slice(-2),
-        ':title': slugify(file),
+        ':title': _.slugify(file),
         ':file': file,
         ':ext': assemble.options.ext,
         ':basename': file,
@@ -822,17 +829,5 @@ module.exports = function(grunt) {
     return string.replace(re, function(match) {
       return map[match];
     });
-  };
-
-  /*
-  * CREDIT: Some of the following code is from helper-slugify
-  * https://github.com/helpers/helper-slugify/
-  */
-  var slugify = function (input) {
-  if (!input || typeof input !== 'string') return input;
-  return input.replace(/^\s+|\s+$/g, '')
-    .toLowerCase().replace(/[^a-z0-9 -]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
   };
 };
