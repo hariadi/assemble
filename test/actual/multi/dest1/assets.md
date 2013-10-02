@@ -10,11 +10,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <h1>Relative Helper</h1>
-<script src="css/one/two/three.js"></script>
-<script src="js/one/two/three.js"></script>
-<script src="jsone/two/three.js"></script>
-<script src="./jsone/two/three.js"></script>
+<script src="../../../../css/one/two/three.js"></script>
+<script src="../../../../js/one/two/three.js"></script>
+<script src="../../../../jsone/two/three.js"></script>
+<script src="./../../../../jsone/two/three.js"></script>
 
 <h1>Assets Helper</h1>
 <script src="../../assetsone/two/three.js"></script>
@@ -25,45 +34,61 @@
 
 ## Debug Info
 ``` json
-'../../assets'
+{ _page: 'all',
+  dirname: 'test/actual/multi/dest1',
+  filename: 'assets.md',
+  pageName: 'assets.md',
+  pagename: 'assets.md',
+  basename: 'assets',
+  src: 'test/fixtures/pages/assets.hbs',
+  dest: 'test/actual/multi/dest1/assets.md',
+  assets: '../../assets',
+  ext: '.md',
+  extname: '.md',
+  page: '<p>Examples to test the "relative" and "assets" variables, and to show how they work</p>\n\n{{#assets_one}}\n<h1>"Public" Folder</h1>\n<p>Public (assets) folder is in the project root</p>\n<pre>\nassets_one: {\n  options: {assets: \'test/actual/public\'},\n  files: {\'test/actual/assets-public-folder.html\': [\'test/files/assets.hbs\']}\n},\n</pre>\n{{/assets_one}}\n\n\n{{#assets_two}}\n<h1>Same Folder</h1>\n<p>Assets folder is in the same dir as dest files.</p>\n<pre>\nassets_two: {\n  options: {assets: \'test/actual\'},\n  files: {\'test/actual/assets-same-folder.html\': [\'test/files/assets.hbs\']}\n},\n</pre>\n{{/assets_two}}\n\n\n{{#assets_three}}\n<h1>Project Root</h1>\n<p>Assets folder is in the project root, which is not the same dir as dest files.</p>\n<pre>\nassets_three: {\n  options: {assets: \'\'},\n  files: {\'test/actual/assets-root.html\': [\'test/files/assets.hbs\']}\n}\n</pre>\n{{/assets_three}}\n\n\n{{#assets_four}}\n<h1>Project Root With Slash</h1>\n<p>Assets folder is in the project rool, which is not the same dir as the dest files.</p>\n<pre>\nassets_four: {\n  options: {assets: \'./\'},\n  files: {\'test/actual/assets-root-with-slash.html\': [\'test/files/assets.hbs\']}\n}\n</pre>\n{{/assets_four}}\n\n\n{{#assets_five}}\n<h1>Same Folder With Slash</h1>\n<p>Assets folder is in the same dir as dest files</p>\n<pre>\nassets_five: {\n  options: {assets: \'test/actual\'},\n  files: {\'test/actual/assets-same-folder-with-slash.html\': [\'test/files/assets.hbs\']}\n}\n</pre>\n{{/assets_five}}\n\n\n<h1>Relative Helper</h1>\n<script src="{{relative page.dest \'css\'}}/one/two/three.js"></script>\n<script src="{{relative page.dest \'js\'}}/one/two/three.js"></script>\n<script src="{{relative page.dest \'js\'}}one/two/three.js"></script>\n<script src="./{{relative page.dest \'js\'}}one/two/three.js"></script>\n\n<h1>Assets Helper</h1>\n<script src="{{assets}}one/two/three.js"></script>\n<script src="{{assets}}/one/two/three.js"></script>\n\n',
+  data: {} }
 ```
 
 
 ### "{{#each pages}}" Links
-[example](test/actual/multi/dest1/example.md)
-[alert](test/actual/multi/dest1/alert.md)
-[collections-categories](test/actual/multi/dest1/collections-categories.md)
-[collections-categories2](test/actual/multi/dest1/collections-categories2.md)
-[collections-tags-2](test/actual/multi/dest1/collections-tags-2.md)
-[collections-tags](test/actual/multi/dest1/collections-tags.md)
-[complex](test/actual/multi/dest1/complex.md)
-[context](test/actual/multi/dest1/context.md)
-[debug-helpers](test/actual/multi/dest1/debug-helpers.md)
-[deep-nested-layouts](test/actual/multi/dest1/deep-nested-layouts.md)
-[assets](test/actual/multi/dest1/assets.md)
-[gist-helper](test/actual/multi/dest1/gist-helper.md)
-[helpers](test/actual/multi/dest1/helpers.md)
-[home](test/actual/multi/dest1/home.md)
-[html-helpers](test/actual/multi/dest1/html-helpers.md)
-[md-helper](test/actual/multi/dest1/md-helper.md)
-[nested-layouts](test/actual/multi/dest1/nested-layouts.md)
-[no-layout-none](test/actual/multi/dest1/no-layout-none.md)
-[no-layout](test/actual/multi/dest1/no-layout.md)
-[page](test/actual/multi/dest1/page.md)
-[simple3](test/actual/multi/dest1/simple3.md)
+[helpers](helpers.md)
+[alert](alert.md)
+[collections-categories](collections-categories.md)
+[collections-categories2](collections-categories2.md)
+[collections-tags-2](collections-tags-2.md)
+[collections-tags](collections-tags.md)
+[complex](complex.md)
+[context](context.md)
+[debug-helpers](debug-helpers.md)
+[deep-nested-layouts](deep-nested-layouts.md)
+[example](example.md)
+[gist-helper](gist-helper.md)
+[assets](assets.md)
+[home](home.md)
+[html-helpers](html-helpers.md)
+[index](index.md)
+[md-helper](md-helper.md)
+[nested-layouts](nested-layouts.md)
+[no-layout-none](no-layout-none.md)
+[no-layout](no-layout.md)
+[no-yfm](no-yfm.md)
+[page](page.md)
+[postprocess](postprocess.md)
+[postprocess2](postprocess2.md)
+[simple3](simple3.md)
 
 
 
 ### {{#each pages}} "this" context
 
-#### example.md
+#### helpers.md
 this.assets:   ../../assets
-this.dest:     test/actual/multi/dest1/example.md
+this.dest:     test/actual/multi/dest1/helpers.md
 this.absolute:
 this.dirname:  test/actual/multi/dest1
-this.filename: example.md
-this.pagename: example.md
-this.basename: example
+this.filename: helpers.md
+this.pagename: helpers.md
+this.basename: helpers
 this.extname:  .md
 this.ext:      .md
 
@@ -166,14 +191,14 @@ this.basename: deep-nested-layouts
 this.extname:  .md
 this.ext:      .md
 
-#### assets.md
+#### example.md
 this.assets:   ../../assets
-this.dest:     test/actual/multi/dest1/assets.md
+this.dest:     test/actual/multi/dest1/example.md
 this.absolute:
 this.dirname:  test/actual/multi/dest1
-this.filename: assets.md
-this.pagename: assets.md
-this.basename: assets
+this.filename: example.md
+this.pagename: example.md
+this.basename: example
 this.extname:  .md
 this.ext:      .md
 
@@ -188,14 +213,14 @@ this.basename: gist-helper
 this.extname:  .md
 this.ext:      .md
 
-#### helpers.md
+#### assets.md
 this.assets:   ../../assets
-this.dest:     test/actual/multi/dest1/helpers.md
+this.dest:     test/actual/multi/dest1/assets.md
 this.absolute:
 this.dirname:  test/actual/multi/dest1
-this.filename: helpers.md
-this.pagename: helpers.md
-this.basename: helpers
+this.filename: assets.md
+this.pagename: assets.md
+this.basename: assets
 this.extname:  .md
 this.ext:      .md
 
@@ -218,6 +243,17 @@ this.dirname:  test/actual/multi/dest1
 this.filename: html-helpers.md
 this.pagename: html-helpers.md
 this.basename: html-helpers
+this.extname:  .md
+this.ext:      .md
+
+#### index.md
+this.assets:   ../../assets
+this.dest:     test/actual/multi/dest1/index.md
+this.absolute:
+this.dirname:  test/actual/multi/dest1
+this.filename: index.md
+this.pagename: index.md
+this.basename: index
 this.extname:  .md
 this.ext:      .md
 
@@ -265,6 +301,17 @@ this.basename: no-layout
 this.extname:  .md
 this.ext:      .md
 
+#### no-yfm.md
+this.assets:   ../../assets
+this.dest:     test/actual/multi/dest1/no-yfm.md
+this.absolute:
+this.dirname:  test/actual/multi/dest1
+this.filename: no-yfm.md
+this.pagename: no-yfm.md
+this.basename: no-yfm
+this.extname:  .md
+this.ext:      .md
+
 #### page.md
 this.assets:   ../../assets
 this.dest:     test/actual/multi/dest1/page.md
@@ -273,6 +320,28 @@ this.dirname:  test/actual/multi/dest1
 this.filename: page.md
 this.pagename: page.md
 this.basename: page
+this.extname:  .md
+this.ext:      .md
+
+#### postprocess.md
+this.assets:   ../../assets
+this.dest:     test/actual/multi/dest1/postprocess.md
+this.absolute:
+this.dirname:  test/actual/multi/dest1
+this.filename: postprocess.md
+this.pagename: postprocess.md
+this.basename: postprocess
+this.extname:  .md
+this.ext:      .md
+
+#### postprocess2.md
+this.assets:   ../../assets
+this.dest:     test/actual/multi/dest1/postprocess2.md
+this.absolute:
+this.dirname:  test/actual/multi/dest1
+this.filename: postprocess2.md
+this.pagename: postprocess2.md
+this.basename: postprocess2
 this.extname:  .md
 this.ext:      .md
 
@@ -291,238 +360,326 @@ this.ext:      .md
 ### {{#each pages}}
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 #### assets.md
-page.assets:   
-page.dest:     
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
 page.absolute: 
-page.dirname:  
-page.filename: 
-page.pagename: 
-page.basename: 
-page.extname:  
-page.ext:      
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
+
+#### assets.md
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
+page.absolute: 
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
+
+#### assets.md
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
+page.absolute: 
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
+
+#### assets.md
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
+page.absolute: 
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
+
+#### assets.md
+page.assets:   ../../assets
+page.dest:     test/actual/multi/dest1/assets.md
+page.absolute: 
+page.dirname:  test/actual/multi/dest1
+page.filename: assets.md
+page.pagename: assets.md
+page.basename: assets
+page.extname:  .md
+page.ext:      .md
 
 
 ### {{#each pages}} "page" context
+
+#### assets.md
+assets:        ../../assets
+dest:          
+absolute:      test/actual/multi/dest1/assets.md
+dirname:       test/actual/multi/dest1
+filename:      assets.md
+pagename:      assets.md
+basename:      assets
+extname:       .md
+ext:           .md
+
+#### assets.md
+assets:        ../../assets
+dest:          
+absolute:      test/actual/multi/dest1/assets.md
+dirname:       test/actual/multi/dest1
+filename:      assets.md
+pagename:      assets.md
+basename:      assets
+extname:       .md
+ext:           .md
+
+#### assets.md
+assets:        ../../assets
+dest:          
+absolute:      test/actual/multi/dest1/assets.md
+dirname:       test/actual/multi/dest1
+filename:      assets.md
+pagename:      assets.md
+basename:      assets
+extname:       .md
+ext:           .md
+
+#### assets.md
+assets:        ../../assets
+dest:          
+absolute:      test/actual/multi/dest1/assets.md
+dirname:       test/actual/multi/dest1
+filename:      assets.md
+pagename:      assets.md
+basename:      assets
+extname:       .md
+ext:           .md
 
 #### assets.md
 assets:        ../../assets

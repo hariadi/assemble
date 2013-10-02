@@ -7,8 +7,7 @@
   </head>
   <body style="padding-top: 60px;">
     <div class="container">
-      
-<h2>HTML list helpers.</h2>
+      <h2>HTML list helpers.</h2>
 <h3>{{ul}} helper</h3>
 <ul class="nav"><li>
   one
@@ -63,19 +62,17 @@
       <h3>Paths Examples</h3>
 
 <pre class="json">
-{ _page: 'all',
-  pagename: 'html-helpers.html',
+{ filename: 'html-helpers.html',
   extname: '.html',
+  dest: 'test/actual/paths/html-helpers.html',
+  basename: 'html-helpers',
+  _page: 'all',
+  dirname: 'test/actual/paths',
   moreLinks: 
    [ { url: 'one', text: 'two' },
      { url: 'three', text: 'four' },
      { url: 'five', text: 'size' },
      [length]: 3 ],
-  ext: '.html',
-  dest: 'test/actual/paths/html-helpers.html',
-  assets: '../assets',
-  src: 'test/fixtures/pages/html-helpers.hbs',
-  dirname: 'test/actual/paths',
   data: 
    { text: 'helpers.js',
      links: [ 'one', 'two', 'three', [length]: 3 ],
@@ -84,26 +81,28 @@
         { url: 'three', text: 'four' },
         { url: 'five', text: 'size' },
         [length]: 3 ] },
-  text: 'helpers.js',
-  pageName: 'html-helpers.html',
-  page: '\n{{#markdown}}\n\n## HTML list helpers.\n\n### \\{{ul}} helper\n{{#ul links class="nav"}}\n  {{.}}\n{{/ul}}\n\n{{#ul moreLinks class="nav"}}\n  <a href="{{url}}">{{text}}</a>\n{{/ul}}\n\n### \\{{ol}} helper\n{{#ol links class="nav"}}\n  {{.}}\n{{/ol}}\n\n{{#ol moreLinks class="nav"}}\n  <a href="{{url}}">{{text}}</a>\n{{/ol}}\n\n### \\{{link}} helper\n{{_link url text}}\n{{_link \'http://github.com\' \'GitHub\'}}\n{{_link \'http://github.com\' \'GitHub\' \'nav-link\'}}\n\n{{/markdown}}{{! /end markdown}}\n',
   links: [ 'one', 'two', 'three', [length]: 3 ],
-  basename: 'html-helpers',
-  filename: 'html-helpers.html' }
+  assets: '../assets',
+  ext: '.html',
+  pageName: 'html-helpers.html',
+  page: '{{#markdown}}\n\n## HTML list helpers.\n\n### \\{{ul}} helper\n{{#ul links class="nav"}}\n  {{.}}\n{{/ul}}\n\n{{#ul moreLinks class="nav"}}\n  <a href="{{url}}">{{text}}</a>\n{{/ul}}\n\n### \\{{ol}} helper\n{{#ol links class="nav"}}\n  {{.}}\n{{/ol}}\n\n{{#ol moreLinks class="nav"}}\n  <a href="{{url}}">{{text}}</a>\n{{/ol}}\n\n### \\{{link}} helper\n{{_link url text}}\n{{_link \'http://github.com\' \'GitHub\'}}\n{{_link \'http://github.com\' \'GitHub\' \'nav-link\'}}\n\n{{/markdown}}{{! /end markdown}}\n',
+  text: 'helpers.js',
+  src: 'test/fixtures/pages/html-helpers.hbs',
+  pagename: 'html-helpers.html' }
 </pre>
 
       <ul>
       
-        <li><a href="example.html">example</a></li>
+        <li><a href="helpers.html">helpers</a></li>
         <!--
         "this"
         ===============================
-        this.dest:     test/actual/paths/example.html
+        this.dest:     test/actual/paths/helpers.html
         this.absolute: 
         this.dirname:  test/actual/paths
-        this.filename: example.html
-        this.pagename: example.html
-        this.basename: example
+        this.filename: helpers.html
+        this.pagename: helpers.html
+        this.basename: helpers
         this.extname:  .html
         this.ext:      .html
 
@@ -454,16 +453,16 @@
         ext:           .html
         -->
       
-        <li><a href="assets.html">assets</a></li>
+        <li><a href="example.html">example</a></li>
         <!--
         "this"
         ===============================
-        this.dest:     test/actual/paths/assets.html
+        this.dest:     test/actual/paths/example.html
         this.absolute: 
         this.dirname:  test/actual/paths
-        this.filename: assets.html
-        this.pagename: assets.html
-        this.basename: assets
+        this.filename: example.html
+        this.pagename: example.html
+        this.basename: example
         this.extname:  .html
         this.ext:      .html
 
@@ -526,16 +525,16 @@
         ext:           .html
         -->
       
-        <li><a href="helpers.html">helpers</a></li>
+        <li><a href="assets.html">assets</a></li>
         <!--
         "this"
         ===============================
-        this.dest:     test/actual/paths/helpers.html
+        this.dest:     test/actual/paths/assets.html
         this.absolute: 
         this.dirname:  test/actual/paths
-        this.filename: helpers.html
-        this.pagename: helpers.html
-        this.basename: helpers
+        this.filename: assets.html
+        this.pagename: assets.html
+        this.basename: assets
         this.extname:  .html
         this.ext:      .html
 
@@ -608,6 +607,42 @@
         this.filename: html-helpers.html
         this.pagename: html-helpers.html
         this.basename: html-helpers
+        this.extname:  .html
+        this.ext:      .html
+
+        "page"
+        ===============================
+        page.dest:     test/actual/paths/html-helpers.html
+        page.absolute: 
+        page.dirname:  test/actual/paths
+        page.filename: html-helpers.html
+        page.pagename: html-helpers.html
+        page.basename: html-helpers
+        page.extname:  .html
+        page.ext:      .html
+
+        "root"
+        ===============================
+        dest:          
+        absolute:      test/actual/paths/html-helpers.html
+        dirname:       test/actual/paths
+        filename:      html-helpers.html
+        pagename:      html-helpers.html
+        basename:      html-helpers
+        extname:       .html
+        ext:           .html
+        -->
+      
+        <li><a href="index.html">index</a></li>
+        <!--
+        "this"
+        ===============================
+        this.dest:     test/actual/paths/index.html
+        this.absolute: 
+        this.dirname:  test/actual/paths
+        this.filename: index.html
+        this.pagename: index.html
+        this.basename: index
         this.extname:  .html
         this.ext:      .html
 
@@ -778,6 +813,42 @@
         ext:           .html
         -->
       
+        <li><a href="no-yfm.html">no-yfm</a></li>
+        <!--
+        "this"
+        ===============================
+        this.dest:     test/actual/paths/no-yfm.html
+        this.absolute: 
+        this.dirname:  test/actual/paths
+        this.filename: no-yfm.html
+        this.pagename: no-yfm.html
+        this.basename: no-yfm
+        this.extname:  .html
+        this.ext:      .html
+
+        "page"
+        ===============================
+        page.dest:     test/actual/paths/html-helpers.html
+        page.absolute: 
+        page.dirname:  test/actual/paths
+        page.filename: html-helpers.html
+        page.pagename: html-helpers.html
+        page.basename: html-helpers
+        page.extname:  .html
+        page.ext:      .html
+
+        "root"
+        ===============================
+        dest:          
+        absolute:      test/actual/paths/html-helpers.html
+        dirname:       test/actual/paths
+        filename:      html-helpers.html
+        pagename:      html-helpers.html
+        basename:      html-helpers
+        extname:       .html
+        ext:           .html
+        -->
+      
         <li><a href="page.html">page</a></li>
         <!--
         "this"
@@ -788,6 +859,78 @@
         this.filename: page.html
         this.pagename: page.html
         this.basename: page
+        this.extname:  .html
+        this.ext:      .html
+
+        "page"
+        ===============================
+        page.dest:     test/actual/paths/html-helpers.html
+        page.absolute: 
+        page.dirname:  test/actual/paths
+        page.filename: html-helpers.html
+        page.pagename: html-helpers.html
+        page.basename: html-helpers
+        page.extname:  .html
+        page.ext:      .html
+
+        "root"
+        ===============================
+        dest:          
+        absolute:      test/actual/paths/html-helpers.html
+        dirname:       test/actual/paths
+        filename:      html-helpers.html
+        pagename:      html-helpers.html
+        basename:      html-helpers
+        extname:       .html
+        ext:           .html
+        -->
+      
+        <li><a href="postprocess.html">postprocess</a></li>
+        <!--
+        "this"
+        ===============================
+        this.dest:     test/actual/paths/postprocess.html
+        this.absolute: 
+        this.dirname:  test/actual/paths
+        this.filename: postprocess.html
+        this.pagename: postprocess.html
+        this.basename: postprocess
+        this.extname:  .html
+        this.ext:      .html
+
+        "page"
+        ===============================
+        page.dest:     test/actual/paths/html-helpers.html
+        page.absolute: 
+        page.dirname:  test/actual/paths
+        page.filename: html-helpers.html
+        page.pagename: html-helpers.html
+        page.basename: html-helpers
+        page.extname:  .html
+        page.ext:      .html
+
+        "root"
+        ===============================
+        dest:          
+        absolute:      test/actual/paths/html-helpers.html
+        dirname:       test/actual/paths
+        filename:      html-helpers.html
+        pagename:      html-helpers.html
+        basename:      html-helpers
+        extname:       .html
+        ext:           .html
+        -->
+      
+        <li><a href="postprocess2.html">postprocess2</a></li>
+        <!--
+        "this"
+        ===============================
+        this.dest:     test/actual/paths/postprocess2.html
+        this.absolute: 
+        this.dirname:  test/actual/paths
+        this.filename: postprocess2.html
+        this.pagename: postprocess2.html
+        this.basename: postprocess2
         this.extname:  .html
         this.ext:      .html
 

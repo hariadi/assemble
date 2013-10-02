@@ -16,10 +16,18 @@
 ## Contributing
 Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
 
-## Author
+## Authors
 
-+ [{%= authors[0].name %}]({%= authors[0].url %})
-+ [{%= authors[1].name %}]({%= authors[1].url %})
+**Jon Schlinkert**
+
++ [twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
++ [github.com/jonschlinkert](http://github.com/jonschlinkert)
+
+**Brian Woodward**
+
++ [twitter.com/doowb](http://twitter.com/doowb)
++ [github.com/doowb](http://github.com/doowb)
+
 
 ## Release History
 {%= _.include("docs-changelog.md") %}
@@ -30,4 +38,4 @@ Released under the [MIT License](./LICENSE-MIT).
 
 ***
 
-_This file was generated on {%= grunt.template.today() %}._
+_This file was generated on {%= grunt.template.date("fullDate") %}._

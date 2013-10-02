@@ -22,6 +22,7 @@ module.exports = function(grunt) {
     // package.json
     pkg: grunt.file.readJSON('package.json'),
     config: grunt.file.readJSON('test/fixtures/data/config.json'),
+    translation: require('./test/fixtures/data/translations'),
 
     // Metadata
     meta: {
@@ -50,11 +51,20 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        flatten: true,
-        layout: 'layout.hbs',
+        assets: 'test/actual/assets',
+        helpers: 'test/helpers/*.js',
         layoutdir: 'test/fixtures/layouts',
-        helpers: 'test/helpers/helper-*.js',
-        assets: 'test/actual/assets'
+        layout: 'layout.hbs',
+        flatten: true
+      },
+      layout_ext: {
+        options: {
+          layout: 'none', // override default, layout is redefined in YFM
+          layoutext: '.hbs'
+        },
+        files: {
+          'test/actual/paths/': ['test/fixtures/pages/layoutext/layoutext.hbs']
+        }
       },
       paths: {
         options: {
@@ -64,6 +74,30 @@ module.exports = function(grunt) {
         },
         files: {
           'test/actual/paths/': ['test/fixtures/pages/*.hbs']
+        }
+      },
+      // Post-process function
+      postprocess: {
+        options: {
+          postprocess: function(src) {
+            return require('frep').replaceStr(src, grunt.config.process('<%= translation.patterns %>'));
+          }
+        },
+        files: {
+          'test/actual/postprocess.html': ['test/fixtures/pages/postprocess.hbs']
+        }
+      },
+      postprocess2: {
+        options: {
+          postprocess: function(src) {
+            return require('js-prettify').html(src, {
+              indent_size: 2,
+              indent_inner_html: true
+            }).replace(/(\r\n|\n\r|\n|\r){2,}/g, '\n');
+          }
+        },
+        files: {
+          'test/actual/postprocess2.html': ['test/fixtures/pages/postprocess2.hbs']
         }
       },
       // Build one page
@@ -84,6 +118,14 @@ module.exports = function(grunt) {
           'test/actual/yfm/': ['test/fixtures/pages/yfm/*.hbs']
         }
       },
+      noyfm: {
+        options: {
+          data: 'test/fixtures/data/*.{json,yml}'
+        },
+        files: {
+          'test/actual/yfm/': ['test/fixtures/pages/no-yfm.hbs']
+        }
+      },
       markdown: {
         options: {
           layout: 'default.md.hbs',
@@ -94,51 +136,40 @@ module.exports = function(grunt) {
           'test/actual/multi/dest1/': ['test/fixtures/pages/*.hbs']
         }
       },
+
+      // Assets paths
       assets_one: {
-        options: {
-          assets: 'test/actual/public',
-          assets_one: true
-        },
+        options: {assets: 'test/actual/public', assets_one: true},
         files: {
           'test/actual/assets-public-folder.html': ['test/fixtures/pages/assets.hbs']
         }
       },
       assets_two: {
-        options: {
-          assets: 'test/actual',
-          assets_two: true
-        },
+        options: {assets: 'test/actual', assets_two: true},
         files: {
           'test/actual/assets-same-folder.html': ['test/fixtures/pages/assets.hbs']
         }
       },
       assets_three: {
-        options: {
-          assets: '.',
-          assets_three: true
-        },
+        options: {assets: '', assets_three: true},
         files: {
           'test/actual/assets-root.html': ['test/fixtures/pages/assets.hbs']
         }
       },
       assets_four: {
-        options: {
-          assets: './',
-          assets_four: true
-        },
+        options: {assets: './', assets_four: true},
         files: {
           'test/actual/assets-root-with-slash.html': ['test/fixtures/pages/assets.hbs']
         }
       },
       assets_five: {
-        options: {
-          assets: 'test/actual/',
-          assets_five: true
-        },
+        options: {assets: 'test/actual/', assets_five: true},
         files: {
           'test/actual/assets-same-folder-with-slash.html': ['test/fixtures/pages/assets.hbs']
         }
       },
+
+
       custom_helpers: {
         options: {
           helpers: ['test/helpers/**/*.js'],
@@ -277,6 +308,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['assemble', 'mochaTest']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'clean', 'test', 'sync']);
+  grunt.registerTask('default', ['jshint', 'clean', 'test', 'docs']);
 
 };

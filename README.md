@@ -21,7 +21,7 @@ Once that's done, add this line to your project's Gruntfile:
 grunt.loadNpmTasks('assemble');
 ```
 
-## The "assemble" task
+### The "assemble" task
 _Run the "assemble" task with the `grunt assemble` command._
 
 Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
@@ -49,25 +49,25 @@ assemble: {
 ## Options
 See the documentation for [Options](http://assemble.io/docs/Options.html) for more information.
 
-#### [assets](http://assemble.io/docs/options-assets.html)
+##### [assets](http://assemble.io/docs/options-assets.html)
 Type: `String`
 Default: `undefined`
 
 Used with the `{{assets}}` variable to resolve the relative path from the _dest file_ to the _assets_ folder.
 
-#### [data](http://assemble.io/docs/options-data.html)
+##### [data](http://assemble.io/docs/options-data.html)
 Type: `String|Array`
 Default: `src/data`
 
 Specify the data to supply to your templates. Data may be formatted in `JSON`, `YAML` or [YAML front matter](http://assemble.io/docs/YAML-front-matter.html).
 
-#### [layoutdir](http://assemble.io/docs/options-layoutdir.html)
+##### [layoutdir](http://assemble.io/docs/options-layoutdir.html)
 Type: `String`
 Default: `undefined`
 
 The directory to use as the "cwd" for [layouts](http://assemble.io/docs/options-layout.html). When this option is defined, layouts may be defined using only the name of the layout.
 
-#### [layout](http://assemble.io/docs/options-layout.html)
+##### [layout](http://assemble.io/docs/options-layout.html)
 Type: `String`
 Default: `undefined`
 
@@ -75,13 +75,13 @@ If set, this defines the layout file to use for the [task or target][tasks-and-t
 
 [tasks-and-targets]: http://gruntjs.com/configuring-tasks#task-configuration-and-targets
 
-#### [partials](http://assemble.io/docs/options-partials.html)
+##### [partials](http://assemble.io/docs/options-partials.html)
 Type:  `String|Array`
 Default: `undefined`
 
 Specifies the Handlebars partials files, or paths to the directories of files to be used.
 
-#### [helpers](http://assemble.io/docs/options-helpers.html)
+##### [helpers](http://assemble.io/docs/options-helpers.html)
 Type: `String|Array`
 Default: [handlebars-helpers](http://github.com/assemble/handlebars-helpers)
 
@@ -89,25 +89,55 @@ Path to the custom helper or helpers to use with the current template engine.
 
 Assemble includes [handlebars-helpers](http://assemble.io/docs/helpers/index.html) as a dependency, so any helpers from that library may be used in your templates.
 
-#### [ext](http://assemble.io/docs/options-ext.html)
+##### postprocess
+Type: `Function`
+Default: `undefined`
+
+Function to use for post-processing generated HTML. Example:
+
+```js
+options: {
+  postprocess: function(src) {
+    return require('frep').replaceStr(src, [
+      {
+        // replace "then" with "now"
+        pattern: "then",
+        replacement: "now"
+      },
+      {
+        // replace "Ruby" with "JavaScript"
+        pattern: "Ruby",
+        replacement: "JavaScript"
+      },
+      {
+        // replace "Jekyll" with "Assemble"
+        pattern: "Jekyll",
+        replacement: "Assemble"
+      }
+    ]);
+  }
+}
+```
+
+##### [ext](http://assemble.io/docs/options-ext.html)
 Type: `String`
 Default: `.html`
 
 Specify the file extension for destination files. Example:
 
-#### [marked](http://assemble.io/docs/options-marked.html)
+##### [marked](http://assemble.io/docs/options-marked.html)
 Type: `Object`
 Default: Marked.js defaults
 
 Specify the [Marked.js options](https://github.com/chjj/marked#options-1) to use when converting from markdown to HTML.
 
-#### [engine](http://assemble.io/docs/options-engine.html)
+##### [engine](http://assemble.io/docs/options-engine.html)
 Type: `String`
-Default: Handlebars
+Default: `Handlebars` only use this option if you are **not** using Handlebars
 
-Specify the engine to use for compiling templates. Both Handlebars and [Swig Templates](https://github.com/paularmstrong) are supported. Currently Handlebars is the default but this may change.
+Specify the engine to use for compiling templates **if you are not using Handlebars**. Currently, Handlebars is already set by default, but [assemble-swig](https://github.com/assemble/assemble-swig) is available for compiling [Swig Templates](https://github.com/paularmstrong).
 
-#### flatten
+##### flatten
 Type: `Boolean`
 Default: `false`
 
@@ -132,7 +162,7 @@ assemble: {
 }
 ```
 
-### Using multiple targets
+#### Using multiple targets
 
 ```js
 assemble: {
@@ -171,13 +201,22 @@ Visit [Assemble's documentation](http://assemble.io) for many more examples and 
 ## Contributing
 Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
 
-## Author
+## Authors
 
-+ [Jon Schlinkert](https://github.com/jonschlinkert/)
-+ [Brian Woodward](https://github.com/doowb/)
+**Jon Schlinkert**
+
++ [twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
++ [github.com/jonschlinkert](http://github.com/jonschlinkert)
+
+**Brian Woodward**
+
++ [twitter.com/doowb](http://twitter.com/doowb)
++ [github.com/doowb](http://github.com/doowb)
+
 
 ## Release History
 
+ * 2013-09-30   v0.4.8   Assemble now builds 30-50% faster due to some refactoring to async and how context is calculated.
  * 2013-09-20   v0.4.7   Adds grunt-readme to make it easier to keep the readme updated using templates. Keep options.partials intact so they can be used in helpers.
  * 2013-09-15   v0.4.6   Updating how the assets path is calculated. Adding resolve-dep and ability to load helpers from node modules using minimatch patterns
  * 2013-09-03   v0.4.5   Bug fix: allow page content containing $. Add alias metadata for data on pages configuration object.
@@ -207,4 +246,4 @@ Released under the [MIT License](./LICENSE-MIT).
 
 ***
 
-_This file was generated on Fri Sep 20 2013 19:42:36._
+_This file was generated on Tuesday, October 1, 2013._
