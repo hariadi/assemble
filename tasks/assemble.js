@@ -362,7 +362,10 @@ module.exports = function(grunt) {
                 }
 
                 if (assemble.options.permalink) {
-                  pageObj.dest = targetPath(destFile, assemble, pageContext);
+                  grunt.verbose.writeln(('\n' + 'Assemble permalink:').yellow + (assemble.options.permalink).cyan +' ');
+                  pageObj.targetDest = Utils.pathNormalize(destDirname);
+                  pageObj.permalink = assemble.options.permalink;
+                  pageObj.dest = targetPath(pageObj);
                 }
 
                 assemble.options.collections.pages.items[0].pages.push(pageObj);
@@ -734,7 +737,7 @@ module.exports = function(grunt) {
 
   var getEngineOf = function(fileName) {
     var ext = Utils.extension(fileName);
-    console.log(assemble.engine.extensions[ext]);
+    //console.log(assemble.engine.extensions[ext]);
     return  _( _(assemble.engine.extensions).keys() ).include(ext) ? assemble.engine.extensions[ext] : false;
   };
 
@@ -748,50 +751,37 @@ module.exports = function(grunt) {
     return filecontent;
   };
 
-  /*
-  * CREDIT: Some of the following code is from wintersmith
-  * https://github.com/jnordberg/wintersmith/
-  */
-  var targetPath = function(dest, assemble, context) {
-    var date, targetDest, permalink, filename, file;
+  var targetPath = function(assemble) {
 
-    // Get date from this two context
-    date = context.date || context.timestamp;
+    var data = assemble.data;
+    var date = data.date || data.timestamp;
+    // If no date/timestamp found, use Assemble default destination
+    if (!date) {
+      return assemble.dest;
+    }
+
+    var permalink = assemble.permalink;
+    var basename = assemble.basename;
 
     // Ensure we handle that source object with date object
     date = new Date(Date.parse(date));
 
-    // If no date/timestamp found, use Assemble default method render
-    if (!date) {
-      return dest;
-    }
+    // Add Assemble default dest to permalink
+    permalink = assemble.targetDest + '/' + permalink;
 
-    // Add this permalink to Assemble target dest dirname
-    targetDest = path.dirname(dest);
-    permalink = targetDest + '/' + assemble.options.permalink;
+    // Check for custom ext
+    permalink += (assemble.ext !== '.html') ? assemble.ext : '/index' + assemble.ext
 
-    filename = path.basename(dest);
-    file = filename.substr(0, filename.lastIndexOf('.'));
+    permalink = permalink
+      .replace(':year', date.getFullYear())
+      .replace(':month', ('0' + (date.getMonth() + 1)).slice(-2))
+      .replace(':day', ('0' + date.getDate()).slice(-2))
+      .replace(':title', _str.slugify(basename))
+      .replace(':ext', assemble.ext)
+      .replace(':basename', basename)
+      .replace(':file', basename);
 
-    return replaceAll(permalink, {
-        ':year': date.getFullYear(),
-        ':month': ('0' + (date.getMonth() + 1)).slice(-2),
-        ':day': ('0' + date.getDate()).slice(-2),
-        ':title': _str.slugify(file),
-        ':file': file,
-        ':ext': assemble.options.ext,
-        ':basename': file,
-        //':categories': '',
-        //':tags': ''
-      });
-  };
-
-  var replaceAll = function(string, map) {
-    var re;
-    re = new RegExp(Object.keys(map).join('|'), 'gi');
-    return string.replace(re, function(match) {
-      return map[match];
-    });
+    return permalink;
   };
 
 };
