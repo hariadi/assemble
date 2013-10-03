@@ -361,19 +361,19 @@ module.exports = function(grunt) {
                   return;
                 }
 
-                if (assemble.options.permalink) {
-                  grunt.verbose.writeln(('\n' + 'Assemble permalink:').yellow + (assemble.options.permalink).cyan +' ');
-                  pageObj.targetDest = Utils.pathNormalize(destDirname);
-                  pageObj.permalink = assemble.options.permalink;
-                  pageObj.dest = targetPath(pageObj);
-                }
-
                 assemble.options.collections.pages.items[0].pages.push(pageObj);
                 _(assemble.options.collections).forEach(function(item, key) {
                   if(key !== 'pages') {
                     assemble.options.collections[key] = collection.update(item, pageObj, pageContext);
                   }
                 });
+
+                if (assemble.options.permalink) {
+                  grunt.verbose.writeln(('\n' + 'Assemble permalink:').yellow + (assemble.options.permalink).cyan +' ');
+                  pageObj.targetDest = Utils.pathNormalize(destDirname);
+                  pageObj.permalink = assemble.options.permalink;
+                  pageObj.dest = targetPath(pageObj);
+                }
 
               } catch(err) {
                 grunt.warn(err);
@@ -752,17 +752,21 @@ module.exports = function(grunt) {
   };
 
   var targetPath = function(assemble) {
-
-    var data = assemble.data;
-    var date = data.date || data.timestamp;
-    // If no date/timestamp found, use Assemble default destination
-    if (!date) {
-      return assemble.dest;
-    }
-
+    //var permalinks = [];
     var permalink = assemble.permalink;
     var basename = assemble.basename;
+    var data = assemble.data;
+    var date = data.date || data.timestamp;
+    var categories = data.category || data.categories;
+    var tags = data.tag || data.tags;
 
+    // Don't setup permalink for index.ext
+    if (path.basename(assemble.src) === 'index') {
+      return assemble.dest;
+    }
+    if (!date || permalink.indexOf(':category') !== -1 && !categories) {
+      return assemble.dest;
+    }
     // Ensure we handle that source object with date object
     date = new Date(Date.parse(date));
 
@@ -770,9 +774,10 @@ module.exports = function(grunt) {
     permalink = assemble.targetDest + '/' + permalink;
 
     // Check for custom ext
-    permalink += (assemble.ext !== '.html') ? assemble.ext : '/index' + assemble.ext
+    permalink += (assemble.ext !== '.html') ? '' : '/index';
+    permalink += assemble.ext
 
-    permalink = permalink
+    var url = permalink
       .replace(':year', date.getFullYear())
       .replace(':month', ('0' + (date.getMonth() + 1)).slice(-2))
       .replace(':day', ('0' + date.getDate()).slice(-2))
@@ -781,7 +786,34 @@ module.exports = function(grunt) {
       .replace(':basename', basename)
       .replace(':file', basename);
 
-    return permalink;
+    //permalinks.push(url.replace(':category/', ''));
+
+    // single category only
+    var category = (typeof categories !== 'string') ? categories[0] : categories;
+    url = url.replace(':category', category);
+
+    // single tag only
+    var tag = (typeof tags !== 'string') ? tags[0] : tags;
+    url = url.replace(':tag', tag);
+
+    /*
+    if (typeof categories !== 'string') {
+      categories.forEach(function(category) {
+        permalinks.push(url.replace(':category', category));
+      });
+    } else {
+      url = url.replace(':category', categories);
+      permalinks.push(url);
+    }
+    console.log(permalinks);
+
+    permalinks.forEach(function(target) {
+      target.replace(':category/', '')
+      return target;
+    });
+    */
+
+    return url;
   };
 
 };

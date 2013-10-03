@@ -246,16 +246,15 @@ module.exports = function(grunt) {
       },
       permalink: {
         options: {
-          ext: '/index.html',
-          permalink: ':year/:month/:day/:title',
-          //permalink: ':dirname/:title:ext',
+          //permalink: ':year/:month/:day/:title',
+          permalink: ':category/:title',
           site: {
             title: 'Another Blog with Meta',
             author: 'Brian Woodward'
           }
         },
         files: {
-          'test/actual/permalink/': ['test/fixtures/pages/blog/permalink.hbs']
+          'test/actual/permalink/': ['test/fixtures/pages/blog/*.hbs']
         }
       }
     },

@@ -1,0 +1,28 @@
+---
+title:
+  categories: Categories
+  tags: Tags
+layout: false
+date: 2013-09-21T08:02Z
+categories:
+  - one
+  - two
+  - three
+tags:
+  - tags
+  - test
+  - something
+---
+{{ title.categories }}
+<ul>
+{{#categories}}
+  <li>{{category}}</li>
+{{/categories}}
+</ul>
+
+{{ title.tags }}
+<ul>
+{{#tags}}
+  <li>{{tag}}</li>
+{{/tags}}
+</ul>
