@@ -753,7 +753,18 @@ module.exports = function(grunt) {
 
   var targetPath = function(assemble) {
     //var permalinks = [];
-    var permalink = assemble.permalink;
+    var permalink;
+
+    // predefine permalink.
+    var predefine = {
+      'date': ':year/:month/:day/:title',
+      'none': ':category/:title',
+      'pretty': ':category/:year/:month/:day/:title'
+    };
+
+    // Default from assemble.options.permalink
+    permalink = (predefine[assemble.permalink]) ? predefine[assemble.permalink] : assemble.permalink;
+
     var basename = assemble.basename;
     var data = assemble.data;
     var date = data.date || data.timestamp;
@@ -764,8 +775,12 @@ module.exports = function(grunt) {
     if (path.basename(assemble.src) === 'index') {
       return assemble.dest;
     }
-    if (!date || permalink.indexOf(':category') !== -1 && !categories) {
+    if (!date || (permalink.indexOf(':category') !== -1 && !categories)) {
       return assemble.dest;
+    }
+    // Use :category but no cats define in page metadata
+    if (predefine[assemble.permalink] && !categories) {
+      permalink = permalink.replace(':category/', '');
     }
     // Ensure we handle that source object with date object
     date = new Date(Date.parse(date));
@@ -788,10 +803,14 @@ module.exports = function(grunt) {
 
     //permalinks.push(url.replace(':category/', ''));
 
+    // TODO: how to handle when multiple categories
+    //   - should generate same file with different cats folder.
     // single category only
     var category = (typeof categories !== 'string') ? categories[0] : categories;
     url = url.replace(':category', category);
 
+    // TODO: how to handle when multiple categories
+    //   - should generate same file with different tags folder.
     // single tag only
     var tag = (typeof tags !== 'string') ? tags[0] : tags;
     url = url.replace(':tag', tag);

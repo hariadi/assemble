@@ -246,8 +246,7 @@ module.exports = function(grunt) {
       },
       permalink: {
         options: {
-          //permalink: ':year/:month/:day/:title',
-          permalink: ':category/:title',
+          permalink: 'pretty',
           site: {
             title: 'Another Blog with Meta',
             author: 'Brian Woodward'
